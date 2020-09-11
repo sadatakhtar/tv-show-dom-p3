@@ -10,7 +10,7 @@ let startShowNum = 82;
 
 function setup() {
   getEpisodesFromApi(); 
-  console.log(tvShows);
+  
 }
 window.onload = setup;
 
@@ -21,9 +21,35 @@ function getEpisodesFromApi(){
   }).then(data => {
     console.log(data);
     let totalEpisodes = data.length;
+
+     for(let i=0; i< data.length; i++){
+      //CREATE ELEMENTS
+      let displayCardDiv = document.createElement('div');
+      displayCardDiv.id = "card";
+      displayCardDiv.style.overflow= "auto";
+      let title = document.createElement('h2');
+      title.id = "cardTitle";
+      let cardImage = document.createElement('img');
+      let cardSummary = document.createElement('p');
+      cardSummary.id= "cardSummary";
+      let displayResult = document.getElementById('display');
+
+      //ADD CONTENTS TO ELEMENTS
+      title.textContent= `${data[i].name} - S0${data[i].season}E0${data[i].number}`;
+      cardImage.src = `${data[i].image.medium}`;
+      cardImage.style.borderRadius = "5px"
+      cardSummary.textContent = `${data[i].summary}`;
+      displayResult.textContent = `Displaying ${data.length}/${totalEpisodes} Episodes`;
+
+      //APPEND ELEMENTS TO PARENT
+      mainDiv.appendChild(displayCardDiv);
+      displayCardDiv.appendChild(title);
+      displayCardDiv.appendChild(cardImage);
+      displayCardDiv.appendChild(cardSummary);
+
+    }
     
     //EVENT LISTENERS
-
     selectTag2.addEventListener('change', (x) =>{
 
       mainDiv.textContent = "";
@@ -41,7 +67,7 @@ function getEpisodesFromApi(){
         
         liveSearchBox.addEventListener('input', searchHandler2);
 
-        //DISPLAYS ALL EPISODES
+      //DISPLAYS ALL EPISODES AFTER SELECTION IN DROPDOWN
       for(let i=0; i< dataApi.length; i++){
         //CREATE ELEMENTS
         let displayCardDiv = document.createElement('div');
@@ -104,6 +130,8 @@ function getEpisodesFromApi(){
         displayCardDiv.appendChild(cardSummary);
       }
     }
+
+    //LISTS ALL EPISODES IN EPISODES DROPDOWN
     function selectMenu2(){
       for(let i=0; i<dataApi.length; i++){
          let optionTag = document.createElement('option');
@@ -112,45 +140,45 @@ function getEpisodesFromApi(){
          selectTag.appendChild(optionTag);
       } 
     }
-    selectMenu2();
-    selectTag.addEventListener('change', selectEpisode2);
+        selectMenu2();
+        selectTag.addEventListener('change', selectEpisode2);
 
-      //DISPLAYS SELECTED EPISODE FROM DROPDOWN
-    function selectEpisode2(x){
-      //CLEAR SCREEN
-      mainDiv.textContent= "";
+        //DISPLAYS SELECTED EPISODE FROM DROPDOWN
+        function selectEpisode2(x){
+        //CLEAR SCREEN
+        mainDiv.textContent= "";
 
-      //CREATE ELEMENTS
-      let displayCardDiv = document.createElement('div');
-      displayCardDiv.id = "card";
-      let title = document.createElement('h2');
-      title.id = "cardTitle";
-      let cardImage = document.createElement('img');
-      let cardSummary = document.createElement('p');
-      cardSummary.id= "cardSummary";
-      let displayResult = document.getElementById('display');
+        //CREATE ELEMENTS
+        let displayCardDiv = document.createElement('div');
+        displayCardDiv.id = "card";
+        let title = document.createElement('h2');
+        title.id = "cardTitle";
+        let cardImage = document.createElement('img');
+        let cardSummary = document.createElement('p');
+        cardSummary.id= "cardSummary";
+        let displayResult = document.getElementById('display');
 
-      //ADD CONTENT TO ELEMENTS
-      title.textContent= `${dataApi[x.target.value].name} - S0${dataApi[x.target.value].season}E0${dataApi[x.target.value].number}`;
-      cardImage.src = `${dataApi[x.target.value].image.medium}`;
-      cardImage.style.borderRadius = "5px"
-      cardSummary.textContent = `${dataApi[x.target.value].summary}`;
-      displayResult.textContent = `Displaying 1/${totalEpisodes} episodes`;
+        //ADD CONTENT TO ELEMENTS
+        title.textContent= `${dataApi[x.target.value].name} - S0${dataApi[x.target.value].season}E0${dataApi[x.target.value].number}`;
+        cardImage.src = `${dataApi[x.target.value].image.medium}`;
+        cardImage.style.borderRadius = "5px"
+        cardSummary.textContent = `${dataApi[x.target.value].summary}`;
+        displayResult.textContent = `Displaying 1/${totalEpisodes} episodes`;
 
-      //APPEND ELEMENTS TO PARENT NODES
-      mainDiv.appendChild(displayCardDiv);
-      displayCardDiv.appendChild(title);
-      displayCardDiv.appendChild(cardImage);
-      displayCardDiv.appendChild(cardSummary);
-    }
-
-
+        //APPEND ELEMENTS TO PARENT NODES
+        mainDiv.appendChild(displayCardDiv);
+        displayCardDiv.appendChild(title);
+        displayCardDiv.appendChild(cardImage);
+        displayCardDiv.appendChild(cardSummary);
+        }
 
 
-      }).catch(err => {
-        console.error(err);
-        console.log('error!!!');
-      })
+
+
+        }).catch(err => {
+            console.error(err);
+            console.log('error!!!');
+        })
     });
 
 
@@ -165,32 +193,32 @@ function getEpisodesFromApi(){
     liveSearchBox.addEventListener('input', searchHandler);
 
     //DISPLAYS ALL EPISODES
-    for(let i=0; i< data.length; i++){
-      //CREATE ELEMENTS
-      let displayCardDiv = document.createElement('div');
-      displayCardDiv.id = "card";
-      displayCardDiv.style.overflow= "auto";
-      let title = document.createElement('h2');
-      title.id = "cardTitle";
-      let cardImage = document.createElement('img');
-      let cardSummary = document.createElement('p');
-      cardSummary.id= "cardSummary";
-      let displayResult = document.getElementById('display');
+    // for(let i=0; i< data.length; i++){
+    //   //CREATE ELEMENTS
+    //   let displayCardDiv = document.createElement('div');
+    //   displayCardDiv.id = "card";
+    //   displayCardDiv.style.overflow= "auto";
+    //   let title = document.createElement('h2');
+    //   title.id = "cardTitle";
+    //   let cardImage = document.createElement('img');
+    //   let cardSummary = document.createElement('p');
+    //   cardSummary.id= "cardSummary";
+    //   let displayResult = document.getElementById('display');
 
-      //ADD CONTENTS TO ELEMENTS
-      title.textContent= `${data[i].name} - S0${data[i].season}E0${data[i].number}`;
-      cardImage.src = `${data[i].image.medium}`;
-      cardImage.style.borderRadius = "5px"
-      cardSummary.textContent = `${data[i].summary}`;
-      displayResult.textContent = `Displaying ${data.length}/${totalEpisodes} Episodes`;
+    //   //ADD CONTENTS TO ELEMENTS
+    //   title.textContent= `${data[i].name} - S0${data[i].season}E0${data[i].number}`;
+    //   cardImage.src = `${data[i].image.medium}`;
+    //   cardImage.style.borderRadius = "5px"
+    //   cardSummary.textContent = `${data[i].summary}`;
+    //   displayResult.textContent = `Displaying ${data.length}/${totalEpisodes} Episodes`;
 
-      //APPEND ELEMENTS TO PARENT
-      mainDiv.appendChild(displayCardDiv);
-      displayCardDiv.appendChild(title);
-      displayCardDiv.appendChild(cardImage);
-      displayCardDiv.appendChild(cardSummary);
+    //   //APPEND ELEMENTS TO PARENT
+    //   mainDiv.appendChild(displayCardDiv);
+    //   displayCardDiv.appendChild(title);
+    //   displayCardDiv.appendChild(cardImage);
+    //   displayCardDiv.appendChild(cardSummary);
 
-    }
+    // }
 
     function searchHandler(){
       let searchResult = liveSearchBox.value.toLowerCase();
@@ -229,6 +257,8 @@ function getEpisodesFromApi(){
 
     }
     selectShows();
+
+    //LISTS ALL SHOWS IN SHOWS DROPDOWN
     function selectShows(){
       for(let i=0; i< tvShows.length; i++ ){
         let optionTags = document.createElement('option');
@@ -248,7 +278,7 @@ function getEpisodesFromApi(){
          selectTag.appendChild(optionTag);
       } 
     }
-    //selectMenu();
+    selectMenu();
     selectTag.addEventListener('change', selectEpisode);
 
 
