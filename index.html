@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TV Show Project | Sadat Akhtar(sadatakhtar)</title>
+    <link href="style.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+
+  <body>
+    <div id="root">
+      <div class="container">
+        <div class="header">
+          <header>
+            <nav>
+              <h1>Tv Shows</h1>
+              <ul>
+               <li><input id="searchBox" type="text" placeholder="Live Search..."  title="Enter Episode name"></li> 
+                <li><button id="clearBtn" >Clear Search</button></li>
+                <li><button id="showAllBtn">Show All Episodes</button></li>
+                <li>
+                  <form action="">
+                  <select name="episodes" id="episodes" title="Choose Episode" >
+                    <option id="selectAllEpisodes" value="">Select Episodes</option>
+                  </select>
+                </form>
+                </li>
+                <li>
+                  <form action="">
+                    <select name="shows" id="shows" title="Select Show" >
+                      <option id="selectShow" value="">Shows</option>
+                    </select>
+                  </form>
+                </li>
+              </ul>
+              <p id="display"></p>
+            </nav>
+          </header>
+        </div>
+        <div class="main">
+          
+
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <h5>&copy;Copyright 2020. All data comes from<a href="https://www.tvmaze.com/">TVMaze.com</a></h5>
+    </footer>
+    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
+    <script src="./shows.js"></script>
+
+    <!-- Loads YOUR javascript code -->
+    <script src="script.js"></script>
+  </body>
+</html>
