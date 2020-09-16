@@ -48,7 +48,8 @@ function getEpisodesFromApi(){
       title.textContent= `${tvShows[i].name}`;
       cardImage.src = `${tvShows[i].image}`; //when i remove image (image.medium) the drop down menus work fine???
       cardImage.style.borderRadius = "5px";
-      cardSummary.textContent = `${tvShows[i].summary}`;
+      let modifiedSummary = `${tvShows[i].summary}`.substring(3, tvShows[i].summary.length-4);
+      cardSummary.textContent = modifiedSummary;
       displayResult.textContent = `Displaying ${tvShows.length}/${totalEpisodes} Episodes`;
 
       runTimeEl.textContent = `Runtime: ${tvShows[i].runtime} mins`;
