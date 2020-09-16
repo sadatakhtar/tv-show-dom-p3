@@ -124,7 +124,7 @@ function getEpisodesFromApi(){
 
     function searchHandler2(){
       let searchResult = liveSearchBox.value.toLowerCase();
-      let filteredEpisodes = tv.filter(({name, summary}) => {
+      let filteredEpisodes = dataApi.filter(({name, summary}) => {
         return (name.toLowerCase().includes(searchResult) || summary.toLowerCase().includes(searchResult));
       });
     
