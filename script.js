@@ -6,6 +6,7 @@ let allShows = document.getElementById('showAllBtn');
 let selectTag = document.getElementById('episodes');
 let selectTag2 = document.getElementById('shows');
 let showTitle = document.getElementById('showTitle');
+let firstShowInSelectMenu = document.getElementById('selectShow');
 let tvShows = getAllShows();
 let startShowNum = 82;
 
@@ -108,8 +109,9 @@ function getEpisodesFromApi(){
        
         title.textContent= `${dataApi[i].name} - S0${dataApi[i].season}E0${dataApi[i].number}`;
         cardImage.src = `${dataApi[i].image.medium}`;
-        cardImage.style.borderRadius = "5px"
-        cardSummary.textContent = `${dataApi[i].summary}`;
+        cardImage.style.borderRadius = "5px";
+        let modifiedSummary = `${dataApi[i].summary}`.substring(3, dataApi[i].summary.length-4);
+        cardSummary.textContent = modifiedSummary;
         displayResult.textContent = `Displaying ${dataApi.length}/${totalEpisodes2} Episodes`;
 
         //APPEND ELEMENTS TO PARENT
@@ -122,7 +124,7 @@ function getEpisodesFromApi(){
 
     function searchHandler2(){
       let searchResult = liveSearchBox.value.toLowerCase();
-      let filteredEpisodes = dataApi.filter(({name, summary}) => {
+      let filteredEpisodes = tv.filter(({name, summary}) => {
         return (name.toLowerCase().includes(searchResult) || summary.toLowerCase().includes(searchResult));
       });
     
@@ -145,7 +147,8 @@ function getEpisodesFromApi(){
         title.textContent= `${filteredEpisodes[i].name} - S0${filteredEpisodes[i].season}E0${filteredEpisodes[i].number}`;
         cardImage.src = `${filteredEpisodes[i].image.medium}`;
         cardImage.style.borderRadius = "5px"
-        cardSummary.textContent = `${filteredEpisodes[i].summary}`;
+        let modifiedSummary = `${filteredEpisodes[i].summary}`.substring(3, filteredEpisodes[i].summary.length-4);
+        cardSummary.textContent = modifiedSummary;
         displayResult.textContent = `Displaying ${filteredEpisodes.length}/${totalEpisodes2} episodes`;
     
         //APPEND TO PARENT NODES
@@ -187,7 +190,10 @@ function getEpisodesFromApi(){
         title.textContent= `${dataApi[x.target.value].name} - S0${dataApi[x.target.value].season}E0${dataApi[x.target.value].number}`;
         cardImage.src = `${dataApi[x.target.value].image.medium}`;
         cardImage.style.borderRadius = "5px"
-        cardSummary.textContent = `${dataApi[x.target.value].summary}`;
+
+        let modifiedSummary = `${dataApi[x.target.value].summary}`.substring(3, dataApi[x.target.value].summary.length-4);
+        cardSummary.textContent = modifiedSummary;
+      
         displayResult.textContent = `Displaying 1/${totalEpisodes} episodes`;
 
         //APPEND ELEMENTS TO PARENT NODES
@@ -206,60 +212,11 @@ function getEpisodesFromApi(){
         })
     });
 
-
+    
     allShows.onclick = () => {
       location.reload();
-    //   let totalShows = tvShows.length;
-
-    //  for(let i=0; i< data.length; i++){
-    //   //CREATE ELEMENTS
-    //   let displayCardDiv = document.createElement('div');
-    //   displayCardDiv.id = "card";
-    //   displayCardDiv.style.overflow= "auto";
-    //   let title = document.createElement('h2');
-    //   title.id = "cardTitle";
-    //   let cardImage = document.createElement('img');
-    //   let cardSummary = document.createElement('p');
-    //   cardSummary.id= "cardSummary";
-    //   let displayResult = document.getElementById('display');
-
-    //   // let runTimeEl = document.createElement('h4');
-    //   // runTimeEl.id = "runTimeId";
-    //   // let ratingEl = document.createElement('h4');
-    //   // ratingEl.id = "ratingId";
-    //   // let statusEL = document.createElement('h4');
-    //   // statusEL.id = "statusId";
-
-
-    //   //ADD CONTENTS TO ELEMENTS
-    //   title.textContent= `${tvShows[i].name}`;
-    //   cardImage.src = `${tvShows[i].image.medium}`;
-    //   cardImage.style.borderRadius = "5px"
-    //   cardSummary.textContent = `${tvShows[i].summary}`;
-    //   displayResult.textContent = `Displaying ${tvShows.length}/${totalEpisodes} Episodes`;
-
-    //   // runTimeEl.textContent = `Runtime: ${tvShows[i].runtime} mins`;
-    //   // ratingEl.textContent = `Rating: ${tvShows[i].rating.average}`;
-    //   // statusEL.textContent = `Status: ${tvShows[i].status}`
-
-
-    //   //APPEND ELEMENTS TO PARENT
-    //   mainDiv.appendChild(displayCardDiv);
-
-    //   displayCardDiv.appendChild(title);
-    //   // displayCardDiv.appendChild(ratingEl);
-    //   // displayCardDiv.appendChild(runTimeEl);
-    //   // displayCardDiv.appendChild(statusEL);
-      
-    //   displayCardDiv.appendChild(cardImage);
-    //   displayCardDiv.appendChild(cardSummary);
-
-      
-     
-
-    // }
-
     }
+
     clearButton.onclick = () =>{
     document.getElementById('searchBox').value = '';
     mainDiv.textContent="";
@@ -267,37 +224,10 @@ function getEpisodesFromApi(){
     }
     liveSearchBox.addEventListener('input', searchHandler);
 
-    //DISPLAYS ALL EPISODES
-    // for(let i=0; i< data.length; i++){
-    //   //CREATE ELEMENTS
-    //   let displayCardDiv = document.createElement('div');
-    //   displayCardDiv.id = "card";
-    //   displayCardDiv.style.overflow= "auto";
-    //   let title = document.createElement('h2');
-    //   title.id = "cardTitle";
-    //   let cardImage = document.createElement('img');
-    //   let cardSummary = document.createElement('p');
-    //   cardSummary.id= "cardSummary";
-    //   let displayResult = document.getElementById('display');
-
-    //   //ADD CONTENTS TO ELEMENTS
-    //   title.textContent= `${data[i].name} - S0${data[i].season}E0${data[i].number}`;
-    //   cardImage.src = `${data[i].image.medium}`;
-    //   cardImage.style.borderRadius = "5px"
-    //   cardSummary.textContent = `${data[i].summary}`;
-    //   displayResult.textContent = `Displaying ${data.length}/${totalEpisodes} Episodes`;
-
-    //   //APPEND ELEMENTS TO PARENT
-    //   mainDiv.appendChild(displayCardDiv);
-    //   displayCardDiv.appendChild(title);
-    //   displayCardDiv.appendChild(cardImage);
-    //   displayCardDiv.appendChild(cardSummary);
-
-    // }
-
+    
     function searchHandler(){
       let searchResult = liveSearchBox.value.toLowerCase();
-      let filteredEpisodes = data.filter(({name, summary}) => {
+      let filteredEpisodes = tvShows.filter(({name, summary}) => {
         return (name.toLowerCase().includes(searchResult) || summary.toLowerCase().includes(searchResult));
       });
     
@@ -315,17 +245,36 @@ function getEpisodesFromApi(){
         let cardSummary = document.createElement('p');
         cardSummary.id= "cardSummary";
         let displayResult = document.getElementById('display');
+
+        let runTimeEl = document.createElement('h4');
+        runTimeEl.id = "runTimeId";
+        let ratingEl = document.createElement('h4');
+        ratingEl.id = "ratingId";
+        let statusEL = document.createElement('h4');
+        statusEL.id = "statusId";
     
         //ADD CONTENT TO ELEMENTS
-        title.textContent= `${filteredEpisodes[i].name} - S0${filteredEpisodes[i].season}E0${filteredEpisodes[i].number}`;
+        title.textContent= `${filteredEpisodes[i].name} `;
         cardImage.src = `${filteredEpisodes[i].image.medium}`;
-        cardImage.style.borderRadius = "5px"
-        cardSummary.textContent = `${filteredEpisodes[i].summary}`;
+        cardImage.style.borderRadius = "5px";
+
+        let modifiedSummary = `${filteredEpisodes[i].summary}`.substring(3, filteredEpisodes[i].summary.length-4);
+        cardSummary.textContent = modifiedSummary;
+        
         displayResult.textContent = `Displaying ${filteredEpisodes.length}/${totalEpisodes} episodes`;
+
+        runTimeEl.textContent = `Runtime: ${tvShows[i].runtime} mins`;
+        ratingEl.textContent = `Rating: ${tvShows[i].rating.average}`;
+        statusEL.textContent = `Status: ${tvShows[i].status}`
+
     
         //APPEND TO PARENT NODES
         mainDiv.appendChild(displayCardDiv);
         displayCardDiv.appendChild(title);
+        displayCardDiv.appendChild(ratingEl);
+        displayCardDiv.appendChild(runTimeEl);
+        displayCardDiv.appendChild(statusEL);
+
         displayCardDiv.appendChild(cardImage);
         displayCardDiv.appendChild(cardSummary);
       }
@@ -396,7 +345,7 @@ function getEpisodesFromApi(){
 
 
 
-  
+
 
 
 
