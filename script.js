@@ -2,7 +2,7 @@
 let mainDiv = document.querySelector('.main');
 let liveSearchBox = document.getElementById('searchBox');
 let clearButton = document.getElementById('clearBtn');
-let showAllEpisodes = document.getElementById('showAllBtn');
+let allShows = document.getElementById('showAllBtn');
 let selectTag = document.getElementById('episodes');
 let selectTag2 = document.getElementById('shows');
 let showTitle = document.getElementById('showTitle');
@@ -50,7 +50,7 @@ function getEpisodesFromApi(){
       cardImage.style.borderRadius = "5px";
       let modifiedSummary = `${tvShows[i].summary}`.substring(3, tvShows[i].summary.length-4);
       cardSummary.textContent = modifiedSummary;
-      displayResult.textContent = `Displaying ${tvShows.length}/${totalEpisodes} Episodes`;
+      displayResult.textContent = `Displaying ${tvShows.length}/${totalShows} shows`;
 
       runTimeEl.textContent = `Runtime: ${tvShows[i].runtime} mins`;
       ratingEl.textContent = `Rating: ${tvShows[i].rating.average}`;
@@ -146,7 +146,7 @@ function getEpisodesFromApi(){
         cardImage.src = `${filteredEpisodes[i].image.medium}`;
         cardImage.style.borderRadius = "5px"
         cardSummary.textContent = `${filteredEpisodes[i].summary}`;
-        displayResult.textContent = `Displaying ${filteredEpisodes.length}/${totalEpisodes} episodes`;
+        displayResult.textContent = `Displaying ${filteredEpisodes.length}/${totalEpisodes2} episodes`;
     
         //APPEND TO PARENT NODES
         mainDiv.appendChild(displayCardDiv);
@@ -207,7 +207,7 @@ function getEpisodesFromApi(){
     });
 
 
-    showAllEpisodes.onclick = () => {
+    allShows.onclick = () => {
       location.reload();
     //   let totalShows = tvShows.length;
 
