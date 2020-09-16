@@ -5,6 +5,7 @@ let clearButton = document.getElementById('clearBtn');
 let showAllEpisodes = document.getElementById('showAllBtn');
 let selectTag = document.getElementById('episodes');
 let selectTag2 = document.getElementById('shows');
+let showTitle = document.getElementById('showTitle');
 let tvShows = getAllShows();
 let startShowNum = 82;
 
@@ -21,6 +22,7 @@ function getEpisodesFromApi(){
   }).then(data => {
     console.log(data);
     let totalEpisodes = data.length;
+    let totalShows = tvShows.length;
 
      for(let i=0; i< data.length; i++){
       //CREATE ELEMENTS
@@ -35,11 +37,11 @@ function getEpisodesFromApi(){
       let displayResult = document.getElementById('display');
 
       //ADD CONTENTS TO ELEMENTS
-      title.textContent= `${data[i].name} - S0${data[i].season}E0${data[i].number}`;
-      cardImage.src = `${data[i].image.medium}`;
+      title.textContent= `${tvShows[i].name}`;
+      cardImage.src = `${tvShows[i].image.medium}`;
       cardImage.style.borderRadius = "5px"
-      cardSummary.textContent = `${data[i].summary}`;
-      displayResult.textContent = `Displaying ${data.length}/${totalEpisodes} Episodes`;
+      cardSummary.textContent = `${tvShows[i].summary}`;
+      displayResult.textContent = `Displaying ${tvShows.length}/${totalShows} Shows`;
 
       //APPEND ELEMENTS TO PARENT
       mainDiv.appendChild(displayCardDiv);
@@ -81,6 +83,7 @@ function getEpisodesFromApi(){
         let displayResult = document.getElementById('display');
 
         //ADD CONTENTS TO ELEMENTS
+       
         title.textContent= `${dataApi[i].name} - S0${dataApi[i].season}E0${dataApi[i].number}`;
         cardImage.src = `${dataApi[i].image.medium}`;
         cardImage.style.borderRadius = "5px"
