@@ -36,18 +36,39 @@ function getEpisodesFromApi(){
       cardSummary.id= "cardSummary";
       let displayResult = document.getElementById('display');
 
+      let runTimeEl = document.createElement('h4');
+      runTimeEl.id = "runTimeId";
+      let ratingEl = document.createElement('h4');
+      ratingEl.id = "ratingId";
+      let statusEL = document.createElement('h4');
+      statusEL.id = "statusId";
+
+
       //ADD CONTENTS TO ELEMENTS
       title.textContent= `${tvShows[i].name}`;
-      cardImage.src = `${tvShows[i].image.medium}`;
-      cardImage.style.borderRadius = "5px"
+      cardImage.src = `${tvShows[i].image}`; //when i remove image (image.medium) the drop down menus work fine???
+      cardImage.style.borderRadius = "5px";
       cardSummary.textContent = `${tvShows[i].summary}`;
-      displayResult.textContent = `Displaying ${tvShows.length}/${totalShows} Shows`;
+      displayResult.textContent = `Displaying ${tvShows.length}/${totalEpisodes} Episodes`;
+
+      runTimeEl.textContent = `Runtime: ${tvShows[i].runtime} mins`;
+      ratingEl.textContent = `Rating: ${tvShows[i].rating.average}`;
+      statusEL.textContent = `Status: ${tvShows[i].status}`
+
 
       //APPEND ELEMENTS TO PARENT
       mainDiv.appendChild(displayCardDiv);
+
       displayCardDiv.appendChild(title);
+      displayCardDiv.appendChild(ratingEl);
+      displayCardDiv.appendChild(runTimeEl);
+      displayCardDiv.appendChild(statusEL);
+      
       displayCardDiv.appendChild(cardImage);
       displayCardDiv.appendChild(cardSummary);
+
+      
+     
 
     }
     
@@ -187,6 +208,56 @@ function getEpisodesFromApi(){
 
     showAllEpisodes.onclick = () => {
       location.reload();
+    //   let totalShows = tvShows.length;
+
+    //  for(let i=0; i< data.length; i++){
+    //   //CREATE ELEMENTS
+    //   let displayCardDiv = document.createElement('div');
+    //   displayCardDiv.id = "card";
+    //   displayCardDiv.style.overflow= "auto";
+    //   let title = document.createElement('h2');
+    //   title.id = "cardTitle";
+    //   let cardImage = document.createElement('img');
+    //   let cardSummary = document.createElement('p');
+    //   cardSummary.id= "cardSummary";
+    //   let displayResult = document.getElementById('display');
+
+    //   // let runTimeEl = document.createElement('h4');
+    //   // runTimeEl.id = "runTimeId";
+    //   // let ratingEl = document.createElement('h4');
+    //   // ratingEl.id = "ratingId";
+    //   // let statusEL = document.createElement('h4');
+    //   // statusEL.id = "statusId";
+
+
+    //   //ADD CONTENTS TO ELEMENTS
+    //   title.textContent= `${tvShows[i].name}`;
+    //   cardImage.src = `${tvShows[i].image.medium}`;
+    //   cardImage.style.borderRadius = "5px"
+    //   cardSummary.textContent = `${tvShows[i].summary}`;
+    //   displayResult.textContent = `Displaying ${tvShows.length}/${totalEpisodes} Episodes`;
+
+    //   // runTimeEl.textContent = `Runtime: ${tvShows[i].runtime} mins`;
+    //   // ratingEl.textContent = `Rating: ${tvShows[i].rating.average}`;
+    //   // statusEL.textContent = `Status: ${tvShows[i].status}`
+
+
+    //   //APPEND ELEMENTS TO PARENT
+    //   mainDiv.appendChild(displayCardDiv);
+
+    //   displayCardDiv.appendChild(title);
+    //   // displayCardDiv.appendChild(ratingEl);
+    //   // displayCardDiv.appendChild(runTimeEl);
+    //   // displayCardDiv.appendChild(statusEL);
+      
+    //   displayCardDiv.appendChild(cardImage);
+    //   displayCardDiv.appendChild(cardSummary);
+
+      
+     
+
+    // }
+
     }
     clearButton.onclick = () =>{
     document.getElementById('searchBox').value = '';
